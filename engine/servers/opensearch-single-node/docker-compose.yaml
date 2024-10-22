@@ -8,8 +8,8 @@ services:
       plugins.security.disabled: true
       OPENSEARCH_JAVA_OPTS: "-Xms4g -Xmx4g"
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "29200:9200"
+      - "29300:9300"
     logging:
       driver: "json-file"
       options:
@@ -18,4 +18,4 @@ services:
     deploy:
       resources:
         limits:
-          memory: 25Gb
+          memory: 16Gb
