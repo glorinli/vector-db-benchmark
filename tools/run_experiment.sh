@@ -79,10 +79,10 @@ if [[ "$EXPERIMENT_MODE" == "snapshot" ]]; then
   echo "EXPERIMENT_MODE=$EXPERIMENT_MODE"
 
   curl  -X PUT \
-    "http://${PRIVATE_IP_OF_THE_SERVER}:6333/collections/benchmark/snapshots/recover" \
+    "http://${PRIVATE_IP_OF_THE_SERVER}:16333/collections/benchmark/snapshots/recover" \
     --data-raw "{\"location\": \"${SNAPSHOT_URL}\"}"
 
-  collection_url="http://${PRIVATE_IP_OF_THE_SERVER}:6333/collections/benchmark"
+  collection_url="http://${PRIVATE_IP_OF_THE_SERVER}:16333/collections/benchmark"
   collection_status=$(curl -s "$collection_url" | jq -r '.result.status')
   counter=0
   while [[ "$collection_status" != "green" && "$counter" -lt 5 ]]; do

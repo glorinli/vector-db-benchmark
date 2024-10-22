@@ -36,8 +36,8 @@ fi
 # Define a map for database types and their health check URLs
 declare -A db_health_urls
 db_health_urls["milvus"]="http://localhost:19530/v1/vector/collections"
-db_health_urls["qdrant"]="http://localhost:6333"
-db_health_urls["elasticsearch"]="http://localhost:9200/_cluster/health"
+db_health_urls["qdrant"]="http://localhost:16333"
+db_health_urls["elasticsearch"]="http://localhost:19200/_cluster/health"
 
 # Check if the specified database type exists in the map
 if [ -n "${db_health_urls[$VECTOR_DB]}" ]; then

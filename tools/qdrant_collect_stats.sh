@@ -25,10 +25,10 @@ CURRENT_DATE=$(date +%Y-%m-%d-%H-%M-%S)
 echo "$VM_RSS_MEMORY_USAGE" > results/vm-rss-memory-usage-"${CURRENT_DATE}".txt
 echo "$RSS_ANON_MEMORY_USAGE" > results/rss-anon-memory-usage-"${CURRENT_DATE}".txt
 
-ROOT_API_RESPONSE=$(ssh -t "${SERVER_USERNAME}@${IP_OF_THE_SERVER}" "curl -s http://localhost:6333/")
+ROOT_API_RESPONSE=$(ssh -t "${SERVER_USERNAME}@${IP_OF_THE_SERVER}" "curl -s http://localhost:16333/")
 
 echo "$ROOT_API_RESPONSE" > results/root-api-"${CURRENT_DATE}".json
 
-TELEMETRY_API_RESPONSE=$(ssh -t "${SERVER_USERNAME}@${IP_OF_THE_SERVER}" "curl -s http://localhost:6333/telemetry?details_level=10")
+TELEMETRY_API_RESPONSE=$(ssh -t "${SERVER_USERNAME}@${IP_OF_THE_SERVER}" "curl -s http://localhost:16333/telemetry?details_level=10")
 
 echo "$TELEMETRY_API_RESPONSE" > results/telemetry-api-"${CURRENT_DATE}".json
