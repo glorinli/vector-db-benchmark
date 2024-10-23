@@ -53,7 +53,7 @@ class OpenSearchConfigurator(BaseConfigurator):
     def recreate(self, dataset: Dataset, collection_params):
         if dataset.config.distance == Distance.DOT:
             raise IncompatibilityError
-        if dataset.config.vector_size > 1024:
+        if dataset.config.vector_size > 16000:
             raise IncompatibilityError
 
         self.client.indices.create(
