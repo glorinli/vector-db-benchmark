@@ -2,8 +2,8 @@
 
 set -e
 
-#DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+#DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
 
 SERVER_HOST=${SERVER_HOST:-"10.74.148.41"}
 
