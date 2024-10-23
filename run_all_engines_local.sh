@@ -32,7 +32,7 @@ function run_exp() {
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-tenant'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization'
-run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-tenant'
+# run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-tenant'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-batch-128'
 # run_exp "weaviate-single-node" 'weaviate-m-*'
 # run_exp "milvus-single-node" 'milvus-m-*'
@@ -45,5 +45,6 @@ run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-ten
 # Extra: qdrant configured to tune RPS
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256'
+run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-scalar-quantization'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 
