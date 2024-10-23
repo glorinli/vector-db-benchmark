@@ -19,3 +19,4 @@ services:
       resources:
         limits:
           memory: 16Gb
+          cpus: '8'
