@@ -24,6 +24,8 @@ class QdrantSearcher(BaseSearcher):
         cls.client: QdrantClient = QdrantClient(
             host,
             prefer_grpc=True,
+            port=16333,
+            grpc_port=16334,
             limits=httpx.Limits(max_connections=None, max_keepalive_connections=0),
             **connection_params,
         )
