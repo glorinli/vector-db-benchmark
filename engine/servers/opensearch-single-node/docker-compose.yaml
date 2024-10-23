@@ -7,6 +7,7 @@ services:
       discovery.type: "single-node"
       plugins.security.disabled: true
       OPENSEARCH_JAVA_OPTS: "-Xms4g -Xmx4g"
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: "Copilot!123"
     ports:
       - "29200:9200"
       - "29300:9300"
