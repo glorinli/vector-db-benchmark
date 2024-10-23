@@ -2,9 +2,12 @@
 
 set -e
 
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
 
 SERVER_HOST=${SERVER_HOST:-"localhost"}
+
+export MOCK_PAYLOAD="true"
 
 function run_exp() {
     SERVER_PATH=$1
@@ -20,13 +23,13 @@ function run_exp() {
     echo 'Run experiments...'
     python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" --skip-search
     echo 'Shutdown server...'
-    bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
+    # bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
 }
 
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128'
-# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256'
+run_exp "qdrant-single-node" 'qdrant-m-32-ef-256'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-batch-128'
 # run_exp "weaviate-single-node" 'weaviate-m-*'
 # run_exp "milvus-single-node" 'milvus-m-*'
@@ -39,5 +42,5 @@ function run_exp() {
 # Extra: qdrant configured to tune RPS
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256'
-run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
+# run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 
