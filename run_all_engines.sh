@@ -26,7 +26,7 @@ function run_exp() {
     scp "${SERVER_USERNAME}@${SERVER_HOST}:/projects/glorin.li/code/vector-db-benchmark/monitoring/results/${MONITOR_PATH}-docker.stats.jsonl" "./monitoring/results/${MONITOR_PATH}-docker.stats.jsonl"
 }
 
-run_exp "qdrant-single-node" 'qdrant-m-16-ef-128'
+run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256'
 #run_exp "qdrant-single-node" 'qdrant-m-*'
 #run_exp "weaviate-single-node" 'weaviate-m-*'
 #run_exp "milvus-single-node" 'milvus-m-*'
