@@ -34,6 +34,8 @@ class BaseUploader:
         parallel = self.upload_params.get("parallel", 1)
         batch_size = self.upload_params.get("batch_size", 64)
 
+        print(f"Parallel: {parallel}, batch size: {batch_size}")
+
         self.init_client(
             self.host, distance, self.connection_params, self.upload_params
         )

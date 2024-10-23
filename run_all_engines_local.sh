@@ -18,7 +18,7 @@ function run_exp() {
     source $(poetry env info --path)/bin/activate
     which python
     echo 'Run experiments...'
-    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST"
+    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" --skip-search
     echo 'Shutdown server...'
     bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"

@@ -18,6 +18,9 @@ function run_exp() {
     python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" --skip-search
     ssh -t "${SERVER_USERNAME}@${SERVER_HOST}" "cd /projects/glorin.li/code/vector-db-benchmark/engine/servers/$SERVER_PATH ; docker compose down"
     ssh -t "${SERVER_USERNAME}@${SERVER_HOST}" "cd /projects/glorin.li/code/vector-db-benchmark/monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
+
+    # Pull results from server
+    scp "${SERVER_USERNAME}@${SERVER_HOST}:/projects/glorin.li/code/vector-db-benchmark/monitoring/results/${MONITOR_PATH}-docker.stats.jsonl" "./monitoring/results/${MONITOR_PATH}-docker.stats.jsonl"
 }
 
 run_exp "qdrant-single-node" 'qdrant-m-16-ef-128'
