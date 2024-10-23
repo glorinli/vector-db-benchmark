@@ -5,6 +5,8 @@ from typing import Iterator, List, Optional
 import numpy as np
 
 from dataset_reader.base_reader import BaseReader, Query, Record
+import os
+from dataset_reader import mock_payload
 
 
 class JSONReader(BaseReader):
@@ -16,8 +18,13 @@ class JSONReader(BaseReader):
     def __init__(self, path: Path, normalize=False):
         self.path = path
         self.normalize = normalize
+        self.mock_payload = os.getenv('MOCK_PAYLOAD') == 'true'
+        print(f"MOCK_PAYLOAD: {self.mock_payload}")
 
     def read_payloads(self) -> Iterator[dict]:
+        if self.mock_payload:
+            while True:
+                yield mock_payload.read_payloads()
         if not (self.path / self.PAYLOADS_FILE).exists():
             while True:
                 yield {}
