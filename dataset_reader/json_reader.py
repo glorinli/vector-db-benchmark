@@ -23,8 +23,10 @@ class JSONReader(BaseReader):
 
     def read_payloads(self) -> Iterator[dict]:
         if self.mock_payload:
+            index = 0
             while True:
-                yield mock_payload.read_payloads()
+                yield mock_payload.read_payloads(index)
+                index += 1
         if not (self.path / self.PAYLOADS_FILE).exists():
             while True:
                 yield {}
