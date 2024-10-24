@@ -14,6 +14,35 @@
       },
       "payload_index_params": {
         "a_id": { "is_tenant": true }
+      }
+    },
+    "search_params": [
+      { "parallel": 1, "config": { "hnsw_ef": 64 } },
+      { "parallel": 1, "config": { "hnsw_ef": 128 } },
+      { "parallel": 1, "config": { "hnsw_ef": 256 } },
+      { "parallel": 1, "config": { "hnsw_ef": 512 } },
+      { "parallel": 100, "config": { "hnsw_ef": 64 } },
+      { "parallel": 100, "config": { "hnsw_ef": 128 } },
+      { "parallel": 100, "config": { "hnsw_ef": 256 } },
+      { "parallel": 100, "config": { "hnsw_ef": 512 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "qdrant-payload-m-32-ef-256-scalar-quantization-tenant-36shard",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000000 },
+      "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
+      "quantization_config": {
+        "scalar": {
+          "type": "int8",
+          "quantile": 0.99
+        }
+      },
+      "payload_index_params": {
+        "a_id": { "is_tenant": true }
       },
       "shard_number": 36
     },
