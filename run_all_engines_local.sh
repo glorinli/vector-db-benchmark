@@ -7,6 +7,14 @@ DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
 SERVER_HOST=${SERVER_HOST:-"localhost"}
 
+# Wait user input yes/no to decide whether to skip search
+read -p "Skip search? (yes/no): " skip_search
+
+extra_args=""
+if [ "$skip_search" == "yes" ]; then
+    extra_args="--skip-search"
+fi
+
 export MOCK_PAYLOAD="true"
 
 function run_exp() {
@@ -21,7 +29,7 @@ function run_exp() {
     source $(poetry env info --path)/bin/activate
     which python
     echo 'Run experiments...'
-    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" --skip-search
+    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args
     echo 'Shutdown server...'
     # bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"

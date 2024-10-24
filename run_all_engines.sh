@@ -11,6 +11,14 @@ SERVER_USERNAME=${SERVER_USERNAME:-"root"}
 
 export MOCK_PAYLOAD="true"
 
+# Wait user input yes/no to decide whether to skip search
+read -p "Skip search? (yes/no): " skip_search
+
+extra_args=""
+if [ "$skip_search" == "yes" ]; then
+    extra_args="--skip-search"
+fi
+
 function run_exp() {
     SERVER_PATH=$1
     ENGINE_NAME=$2
@@ -18,7 +26,7 @@ function run_exp() {
     ssh "${SERVER_USERNAME}@${SERVER_HOST}" "nohup bash -c 'cd /projects/glorin.li/code/vector-db-benchmark/monitoring && rm -f docker.stats.jsonl && bash monitor_docker.sh' > /dev/null 2>&1 &"
     ssh -t "${SERVER_USERNAME}@${SERVER_HOST}" "cd /projects/glorin.li/code/vector-db-benchmark/engine/servers/$SERVER_PATH ; docker compose down ; docker compose up -d"
     sleep 10
-    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" --skip-search
+    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args
 #    ssh -t "${SERVER_USERNAME}@${SERVER_HOST}" "cd /projects/glorin.li/code/vector-db-benchmark/engine/servers/$SERVER_PATH ; docker compose down"
     ssh -t "${SERVER_USERNAME}@${SERVER_HOST}" "cd /projects/glorin.li/code/vector-db-benchmark/monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
 
