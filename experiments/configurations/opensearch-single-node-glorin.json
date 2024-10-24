@@ -77,9 +77,33 @@
     "connection_params": {
       "request_timeout": 10000
     },
-    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "engine": "faiss" } },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "engine": "faiss", "space_type": "l2" } },
     "search_params": [
       { "parallel": 1, "config": { "knn.algo_param.ef_search": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "opensearch-faiss-m-32-ef-256-search-ef-256-p-100",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "engine": "faiss", "space_type": "l2" } },
+    "search_params": [
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "opensearch-faiss-m-32-ef-256-search-ef-256-p-200",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "engine": "faiss", "space_type": "l2" } },
+    "search_params": [
+      { "parallel": 200, "config": { "knn.algo_param.ef_search": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },

@@ -60,7 +60,7 @@ function run_exp() {
 # run_exp "qdrant-single-node" 'qdrant-rps-m-*'
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
-run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200'
+# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200'
 
 
 # run_exp "elasticsearch-single-node" 'elastic-m-*'
@@ -73,3 +73,4 @@ run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
+run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
