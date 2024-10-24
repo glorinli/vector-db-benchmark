@@ -33,8 +33,10 @@ def _compute_g_id(index: int) -> str:
 
 def read_payloads(index: int) -> dict:
     return {
-        "a_id": _compute_a_id(index),
-        "g_id": _compute_g_id(index),
+        # "a_id": _compute_a_id(index),
+        # "g_id": _compute_g_id(index),
+        "a_id": "a_id",
+        "g_id": "g_id",
         "e_id": random.choice(MOCK_E_IDS),
         "ex_id": random.choice(MOCK_EX_IDS),
         "x_id": random.choice(MOCK_X_IDS),
