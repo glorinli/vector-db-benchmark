@@ -58,5 +58,5 @@
       { "parallel": 1, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 512 } },
       { "parallel": 100, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 512 } }    ],
     "upload_params": { "parallel": 16, "batch_size": 128 }
-  },
+  }
 ]

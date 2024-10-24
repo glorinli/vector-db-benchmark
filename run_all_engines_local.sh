@@ -2,8 +2,8 @@
 
 set -e
 
-# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
 SERVER_HOST=${SERVER_HOST:-"localhost"}
 
@@ -15,7 +15,7 @@ if [ "$skip_search" == "yes" ]; then
     extra_args="--skip-search"
 fi
 
-export MOCK_PAYLOAD="true"
+export MOCK_PAYLOAD="false"
 
 function run_exp() {
     SERVER_PATH=$1
@@ -40,11 +40,13 @@ function run_exp() {
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-tenant'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization'
-run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-tenant'
+# run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-tenant'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-batch-128'
 # run_exp "weaviate-single-node" 'weaviate-m-*'
 # run_exp "milvus-single-node" 'milvus-m-*'
 # run_exp "qdrant-single-node" 'qdrant-rps-m-*'
+
+# run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 
 
 # run_exp "elasticsearch-single-node" 'elastic-m-*'
@@ -55,4 +57,5 @@ run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-ten
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-scalar-quantization'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
+run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-1'
 
