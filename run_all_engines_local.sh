@@ -15,6 +15,14 @@ if [ "$skip_search" == "yes" ]; then
     extra_args="--skip-search"
 fi
 
+read -p "Skip upload? (yes/no): " skip_upload
+
+if [ "$skip_upload" == "yes" ]; then
+    extra_args="$extra_args --skip-upload"
+fi
+
+read -p "Restart server? (yes/no): " restart_server
+
 export MOCK_PAYLOAD="false"
 
 function run_exp() {
@@ -23,8 +31,13 @@ function run_exp() {
     MONITOR_PATH=$(echo "$ENGINE_NAME" | sed -e 's/[^A-Za-z0-9._-]/_/g')
     echo "Starting server ${SERVER_PATH} ..."
     nohup bash -c 'cd ./monitoring && rm -f docker.stats.jsonl && bash monitor_docker.sh' > /dev/null 2>&1 &
-    bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down ; docker compose up -d"
-    sleep 30
+
+    if [ "$restart_server" == "yes" ]; then
+        echo "Restarting server..."
+        bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down ; docker compose up -d"
+        sleep 30
+    fi
+
     echo 'Activate poetry'
     source $(poetry env info --path)/bin/activate
     which python
