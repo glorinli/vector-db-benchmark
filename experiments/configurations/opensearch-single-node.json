@@ -49,30 +49,6 @@
     "upload_params": { "parallel": 16 }
   },
   {
-    "name": "opensearch-m-32-ef-256-scalar-quantization",
-    "engine": "opensearch",
-    "connection_params": {
-      "request_timeout": 10000
-    },
-    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256, "encoder": { "name": "sq" } } } },
-    "search_params": [
-      { "parallel": 1, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 512 } },
-      { "parallel": 100, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 512 } }    ],
-    "upload_params": { "parallel": 16 }
-  },
-  {
-    "name": "opensearch-m-32-ef-256-batch-128",
-    "engine": "opensearch",
-    "connection_params": {
-      "request_timeout": 10000
-    },
-    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 } } },
-    "search_params": [
-      { "parallel": 1, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 1, "config": { "knn.algo_param.ef_search": 512 } },
-      { "parallel": 100, "config": { "knn.algo_param.ef_search": 128 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }, { "parallel": 100, "config": { "knn.algo_param.ef_search": 512 } }    ],
-    "upload_params": { "parallel": 16, "batch_size": 128 }
-  },
-  {
     "name": "opensearch-m-32-ef-512",
     "engine": "opensearch",
     "connection_params": {

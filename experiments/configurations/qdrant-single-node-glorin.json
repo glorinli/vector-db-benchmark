@@ -1,5 +1,44 @@
 [
   {
+    "name": "qdrant-m-16-ef-128-search-ef-128-p-1",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000000 },
+      "hnsw_config": { "m": 16, "ef_construct": 128 }
+    },
+    "search_params": [
+      { "parallel": 1, "config": { "hnsw_ef": 128 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "qdrant-m-16-ef-128-search-ef-128-p-100",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000000 },
+      "hnsw_config": { "m": 16, "ef_construct": 128 }
+    },
+    "search_params": [
+      { "parallel": 100, "config": { "hnsw_ef": 128 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "qdrant-m-16-ef-128-search-ef-128-p-500",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000000 },
+      "hnsw_config": { "m": 16, "ef_construct": 128 }
+    },
+    "search_params": [
+      { "parallel": 500, "config": { "hnsw_ef": 128 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
     "name": "qdrant-payload-m-32-ef-256-scalar-quantization-tenant",
     "engine": "qdrant",
     "connection_params": { "timeout": 30 },
