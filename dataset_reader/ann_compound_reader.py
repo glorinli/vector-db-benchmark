@@ -25,6 +25,15 @@ class AnnCompoundReader(JSONReader):
             yield vector.tolist()
 
     def read_queries(self) -> Iterator[Query]:
+        mock_meta_conditions = {
+            "and": [
+                {"a_id": {"match": {"value": "a_id"}}},
+                {"g_id": {"match": {"value": "g_id"}}},
+                {"type": {"match": {"value": "kbarticle"}}},
+                {"chunking_strategy": {"match": {"value": "default"}}},
+            ]
+        } if self.mock_payload else None
+
         with open(self.path / self.QUERIES_FILE) as payloads_fp:
             for idx, row in enumerate(payloads_fp):
                 row_json = json.loads(row)
@@ -34,7 +43,7 @@ class AnnCompoundReader(JSONReader):
                 yield Query(
                     vector=vector.tolist(),
                     sparse_vector=None,
-                    meta_conditions=row_json["conditions"],
+                    meta_conditions=mock_meta_conditions if mock_meta_conditions else row_json["conditions"],
                     expected_result=row_json["closest_ids"],
                     expected_scores=row_json["closest_scores"],
                 )

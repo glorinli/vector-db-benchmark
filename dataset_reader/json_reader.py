@@ -20,12 +20,6 @@ class JSONReader(BaseReader):
         self.normalize = normalize
         self.mock_payload = os.getenv('MOCK_PAYLOAD') == 'true'
         print(f"MOCK_PAYLOAD: {self.mock_payload}")
-        self.query_meta_conditions = {
-            "a_id": "a_id",
-            "g_id": "g_id",
-            "type": "kbarticle",
-            "chunking_strategy": "default"
-        } if self.mock_payload else None
 
     def read_payloads(self) -> Iterator[dict]:
         if self.mock_payload:
@@ -76,7 +70,7 @@ class JSONReader(BaseReader):
             yield Query(
                 vector=vector,
                 sparse_vector=None,
-                meta_conditions=self.query_meta_conditions,
+                meta_conditions=None,
                 expected_result=neighbours,
             )
 
