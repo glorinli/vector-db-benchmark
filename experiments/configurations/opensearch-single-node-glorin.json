@@ -24,14 +24,14 @@
     "upload_params": { "parallel": 16 }
   },
   {
-    "name": "opensearch-m-16-ef-128-search-ef-128-p-500",
+    "name": "opensearch-m-16-ef-128-search-ef-128-p-200",
     "engine": "opensearch",
     "connection_params": {
       "request_timeout": 10000
     },
     "collection_params": { "method": { "parameters": { "m": 16, "ef_construction": 128 } } },
     "search_params": [
-      { "parallel": 500, "config": { "knn.algo_param.ef_search": 128 } }
+      { "parallel": 200, "config": { "knn.algo_param.ef_search": 128 } }
     ],
     "upload_params": { "parallel": 16 }
   },
@@ -60,14 +60,14 @@
     "upload_params": { "parallel": 16 }
   },
   {
-    "name": "opensearch-m-32-ef-256-search-ef-256-p-500",
+    "name": "opensearch-m-32-ef-256-search-ef-256-p-200",
     "engine": "opensearch",
     "connection_params": {
       "request_timeout": 10000
     },
     "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 } } },
     "search_params": [
-      { "parallel": 500, "config": { "knn.algo_param.ef_search": 256 } }
+      { "parallel": 200, "config": { "knn.algo_param.ef_search": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },
