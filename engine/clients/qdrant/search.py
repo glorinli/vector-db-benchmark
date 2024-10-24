@@ -54,7 +54,7 @@ class QdrantSearcher(BaseSearcher):
 
         try:
             query_filter = cls.parser.parse(query.meta_conditions)
-            print(f"Query filter: {query_filter}, meta_conditions: {query.meta_conditions}")
+            # print(f"Query filter: {query_filter}, meta_conditions: {query.meta_conditions}")
             res = cls.client.search(
                 collection_name=QDRANT_COLLECTION_NAME,
                 query_vector=query_vector,
