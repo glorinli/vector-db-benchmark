@@ -7,7 +7,7 @@ set -e
 function write_stats {
   while true; do
     docker stats --no-stream --format "{{ json . }}" >> $1
-    sleep 10
+    sleep 5
   done
 }
 
