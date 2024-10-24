@@ -72,6 +72,18 @@
     "upload_params": { "parallel": 16 }
   },
   {
+    "name": "opensearch-faiss-m-32-ef-256-search-ef-256-p-1",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "engine": "faiss" } },
+    "search_params": [
+      { "parallel": 1, "config": { "knn.algo_param.ef_search": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
     "name": "opensearch-m-32-ef-256-scalar-quantization",
     "engine": "opensearch",
     "connection_params": {
