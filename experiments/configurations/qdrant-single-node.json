@@ -227,7 +227,8 @@
       },
       "payload_index_params": {
         "a_id": { "is_tenant": true }
-      }
+      },
+      "shard_number": 36
     },
     "search_params": [
       { "parallel": 1, "config": { "hnsw_ef": 64 } }, { "parallel": 1, "config": { "hnsw_ef": 128 } }, { "parallel": 1, "config": { "hnsw_ef": 256 } }, { "parallel": 1, "config": { "hnsw_ef": 512 } },
