@@ -7,7 +7,7 @@
     },
     "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "name": "hnsw", "engine": "nmslib", "space_type": "cosinesimil" } },
     "search_params": [
-      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 }, "use_post_filter": true }
     ],
     "upload_params": { "parallel": 16 }
   },
@@ -19,7 +19,7 @@
     },
     "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "name": "hnsw", "engine": "nmslib", "space_type": "l2" } },
     "search_params": [
-      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 }, "use_post_filter": true }
     ],
     "upload_params": { "parallel": 16 }
   },
@@ -31,7 +31,7 @@
     },
     "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 }, "name": "hnsw", "engine": "nmslib", "space_type": "innerproduct" } },
     "search_params": [
-      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 }, "use_post_filter": true }
     ],
     "upload_params": { "parallel": 16 }
   }
