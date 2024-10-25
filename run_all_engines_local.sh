@@ -2,7 +2,7 @@
 
 set -e
 
-DATASETS=${DATASETS:-"dbpedia-openai-1M-1536-angular-with-schema"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
 SERVER_HOST=${SERVER_HOST:-"localhost"}
@@ -76,3 +76,5 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
+run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'

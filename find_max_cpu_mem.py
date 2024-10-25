@@ -22,4 +22,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     max_cpu, max_mem = find_max_usage(args.file_path, args.container_name)
     
-    print(f"Max CPU: {max_cpu}%, Max Memory: {max_mem} GiB")
+    print(f"Max CPU: {max_cpu}%, Max Memory: {max_mem}GiB")
