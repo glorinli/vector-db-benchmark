@@ -77,4 +77,5 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
-run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
+run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-100'
