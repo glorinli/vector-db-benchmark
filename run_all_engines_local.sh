@@ -46,6 +46,8 @@ function run_exp() {
     echo 'Shutdown server...'
     # bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
+
+    python3 find_max_cpu_mem.py ./monitoring/results/${MONITOR_PATH}-docker.stats.jsonl $SERVER_PATH
 }
 
 
@@ -73,4 +75,4 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
-run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
