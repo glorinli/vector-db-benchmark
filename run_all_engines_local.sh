@@ -25,6 +25,13 @@ read -p "Restart server? (yes/no): " restart_server
 
 export MOCK_PAYLOAD="true"
 
+# Clear
+read -p "Clear results? (yes/no): " clear_results
+if [ "$clear_results" == "yes" ]; then
+    rm ./monitoring/results/*.jsonl
+    rm ./results/*.json
+fi
+
 function run_exp() {
     SERVER_PATH=$1
     ENGINE_NAME=$2
@@ -78,4 +85,8 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
-run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-100'
+run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-l2-m-32-ef-256-search-ef-256-p-100'
+# run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-l2-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
+# run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-200'

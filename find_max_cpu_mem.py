@@ -10,7 +10,12 @@ def find_max_usage(file_path, container_name):
             data = json.loads(line)
             if container_name in data["Name"]:
                 max_cpu = max(max_cpu, float(data["CPUPerc"].replace('%', '')))
-                max_mem = max(max_mem, float(data["MemUsage"].split('/')[0].replace('GiB', '').strip()))
+                mem_str = data["MemUsage"].split('/')[0]
+
+                if 'GiB' in mem_str:
+                    max_mem = max(max_mem, float(mem_str.replace('GiB', '').strip()))
+                elif 'MiB' in mem_str:
+                    max_mem = max(max_mem, float(mem_str.replace('MiB', '').strip()) / 1024)
     
     return max_cpu, max_mem
 
