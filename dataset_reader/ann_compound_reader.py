@@ -28,9 +28,9 @@ class AnnCompoundReader(JSONReader):
         mock_meta_conditions = {
             "and": [
                 {"a_id": {"match": {"value": "a_id"}}},
-                {"g_id": {"match": {"value": "g_id"}}},
-                {"type": {"match": {"value": "kbarticle"}}},
-                {"chunking_strategy": {"match": {"value": "default"}}},
+                # {"g_id": {"match": {"value": "g_id"}}},
+                # {"type": {"match": {"value": "kbarticle"}}},
+                # {"chunking_strategy": {"match": {"value": "default"}}},
             ]
         } if self.mock_payload else None
 

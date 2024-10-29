@@ -169,5 +169,24 @@
       { "parallel": 100, "config": { "hnsw_ef": 256 } }
     ],
     "upload_params": { "parallel": 16, "batch_size": 128 }
+  },
+  {
+    "name": "qdrant-m-32-ef-256-scalar-quantization",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000000 },
+      "hnsw_config": { "m": 32, "ef_construct": 256 },
+      "quantization_config": {
+        "scalar": {
+          "type": "int8",
+          "quantile": 0.99
+        }
+      }
+    },
+    "search_params": [
+      { "parallel": 100, "config": { "hnsw_ef": 256 } }
+    ],
+    "upload_params": { "parallel": 16, "batch_size": 128 }
   }
 ]

@@ -2,7 +2,9 @@
 
 set -e
 
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
+# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
 SERVER_HOST=${SERVER_HOST:-"localhost"}
@@ -28,8 +30,8 @@ export MOCK_PAYLOAD="true"
 # Clear
 read -p "Clear results? (yes/no): " clear_results
 if [ "$clear_results" == "yes" ]; then
-    rm ./monitoring/results/*.jsonl
-    rm ./results/*.json
+    rm ./monitoring/results/*.jsonl || true
+    rm ./results/*.json || true
 fi
 
 function run_exp() {
@@ -59,6 +61,7 @@ function run_exp() {
 
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128'
+# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-scalar-quantization'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-tenant'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization'
@@ -69,7 +72,7 @@ function run_exp() {
 # run_exp "qdrant-single-node" 'qdrant-rps-m-*'
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
-# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
+run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
 
 
 # run_exp "elasticsearch-single-node" 'elastic-m-*'
@@ -82,6 +85,7 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
@@ -91,4 +95,4 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-quantization-m-32-ef-256-search-ef-256-p-100'
-run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-quantization-m-32-ef-256-search-ef-256-p-100'
+# run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-quantization-m-32-ef-256-search-ef-256-p-100'
