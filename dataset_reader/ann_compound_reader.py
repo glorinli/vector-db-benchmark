@@ -1,10 +1,14 @@
 import json
 from typing import Iterator, List
+import os
 
 import numpy as np
+from pathlib import Path
 
 from dataset_reader.base_reader import Query
 from dataset_reader.json_reader import JSONReader
+
+from dataset_reader import mock_payload
 
 
 class AnnCompoundReader(JSONReader):
@@ -16,6 +20,20 @@ class AnnCompoundReader(JSONReader):
 
     VECTORS_FILE = "vectors.npy"
     QUERIES_FILE = "tests.jsonl"
+
+    def __init__(self, path: Path, normalize=False):
+        super().__init__(path, normalize)
+        self.mock_payload = os.getenv('MOCK_PAYLOAD') == 'true'
+        print(f"MOCK_PAYLOAD: {self.mock_payload}")
+
+    def read_payloads(self) -> Iterator[dict]:
+        if self.mock_payload:
+            index = 0
+            while True:
+                yield mock_payload.read_payloads(index)
+                index += 1
+        else:
+            return super().read_payloads()
 
     def read_vectors(self) -> Iterator[List[float]]:
         vectors = np.load(self.path / self.VECTORS_FILE)
