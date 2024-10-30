@@ -7,6 +7,7 @@ import numpy as np
 
 from dataset_reader.base_reader import Query
 from dataset_reader.json_reader import JSONReader
+from dataset_reader import mock_payload
 
 
 class AnnCompoundReader(JSONReader):
@@ -60,10 +61,12 @@ class AnnCompoundReader(JSONReader):
         if self.filter_config:
             distinct_data_size = self.filter_config.get("distinct_data_size", 1)
             filters = self._get_filters()
+            item_index = 0
             for filter_group in filters:
                 # Map each item's name to value
                 for _ in range(distinct_data_size):
-                    yield {item["name"]: item["value"] for item in filter_group}
+                    extra_payload = mock_payload.read_payloads(item_index)
+                    yield {item["name"]: item["value"] for item in filter_group} | extra_payload
         else:
             return super().read_payloads()
 
