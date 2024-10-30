@@ -52,7 +52,7 @@
         }
       },
       "payload_index_params": {
-        "a_id": { "is_tenant": true }
+        "account_id": { "is_tenant": true }
       }
     },
     "search_params": [
@@ -74,7 +74,7 @@
         }
       },
       "payload_index_params": {
-        "a_id": { "is_tenant": true }
+        "account_id": { "is_tenant": true }
       },
       "shard_number": 36
     },
@@ -130,7 +130,7 @@
       "optimizers_config": { "memmap_threshold": 10000000 },
       "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
       "payload_index_params": {
-        "a_id": { "is_tenant": true }
+        "account_id": { "is_tenant": true }
       }
     },
     "search_params": [
