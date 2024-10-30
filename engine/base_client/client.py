@@ -85,6 +85,7 @@ class BaseClient:
         skip_search: bool = False,
         skip_if_exists: bool = True,
     ):
+        print("running experiment, current time:", datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
         execution_params = self.configurator.execution_params(
             distance=dataset.config.distance, vector_size=dataset.config.vector_size
         )

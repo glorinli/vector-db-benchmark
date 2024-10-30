@@ -90,12 +90,16 @@ class AnnCompoundReader(JSONReader):
         mock_meta_conditions = []
         if self.filter_config:
             filters = self._get_filters()
-            for filter_group in filters:
+            # Pick filters every 10th query
+            for i in range(0, len(filters), 10):
+                filter_group = filters[i]
                 mock_meta_conditions.append({
                     "and": [{item.get("name"): {"match": {"value": item.get("value")}} for item in filter_group}]
                 })
         else:
             mock_meta_conditions = [None]
+
+        print(f"Condition count: {len(mock_meta_conditions)}")
 
         with open(self.path / self.QUERIES_FILE) as payloads_fp:
             for condition in mock_meta_conditions:
