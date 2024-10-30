@@ -2,14 +2,14 @@
 
 set -e
 
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-#DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
+#DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
 
 SERVER_HOST=${SERVER_HOST:-"10.74.148.41"}
 
 SERVER_USERNAME=${SERVER_USERNAME:-"root"}
 
-export MOCK_PAYLOAD="true"
+export FILTER_CONFIG="one_filter"
 
 # Wait user input yes/no to decide whether to skip search
 read -p "Skip search? (yes/no): " skip_search

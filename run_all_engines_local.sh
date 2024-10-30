@@ -25,7 +25,7 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export MOCK_PAYLOAD="true"
+export FILTER_CONFIG="one_filter"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results

@@ -1,0 +1,21 @@
+{
+  "one_filter": {
+    "distinct_data_size": 100000,
+    "distinct_fields": {
+      "name": "account_id",
+      "type": "keyword",
+      "values_count": 10,
+      "next_level": {
+        "name": "group_id",
+        "type": "keyword",
+        "values_count": 10
+      }
+    },
+    "extra_fields": [
+      {
+        "name": "external_id",
+        "type": "keyword"
+      }
+    ]
+  }
+}
