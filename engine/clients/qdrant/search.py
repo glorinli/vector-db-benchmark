@@ -12,6 +12,11 @@ from engine.clients.qdrant.config import QDRANT_COLLECTION_NAME
 from engine.clients.qdrant.parser import QdrantConditionParser
 
 
+def _get_hit_id(hit: rest.ScoredPoint):
+    payload_id = hit.payload.get("id", None)
+    return payload_id if payload_id is not None else hit.id
+
+
 class QdrantSearcher(BaseSearcher):
     search_params = {}
     client: QdrantClient = None
@@ -60,9 +65,10 @@ class QdrantSearcher(BaseSearcher):
                 query_vector=query_vector,
                 query_filter=query_filter,
                 limit=top,
+                with_payload=True,
                 search_params=rest.SearchParams(**cls.search_params.get("config", {})),
             )
         except Exception as ex:
             print(f"Something went wrong during search: {ex}")
             raise ex
-        return [(hit.id, hit.score) for hit in res]
+        return [(_get_hit_id(hit), hit.score) for hit in res]
