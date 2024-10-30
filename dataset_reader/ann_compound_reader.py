@@ -87,18 +87,27 @@ class AnnCompoundReader(JSONReader):
                 yield vector.tolist()
 
     def read_queries(self) -> Iterator[Query]:
-        # TODO
+        mock_meta_conditions = []
+        if self.filter_config:
+            filters = self._get_filters()
+            for filter_group in filters:
+                mock_meta_conditions.append({
+                    "and": [{item.get("name"): {"match": {"value": item.get("value")}} for item in filter_group}]
+                })
+        else:
+            mock_meta_conditions = [None]
 
         with open(self.path / self.QUERIES_FILE) as payloads_fp:
-            for idx, row in enumerate(payloads_fp):
-                row_json = json.loads(row)
-                vector = np.array(row_json["query"])
-                if self.normalize:
-                    vector /= np.linalg.norm(vector)
-                yield Query(
-                    vector=vector.tolist(),
-                    sparse_vector=None,
-                    meta_conditions=row_json["conditions"],
-                    expected_result=row_json["closest_ids"],
-                    expected_scores=row_json["closest_scores"],
-                )
+            for condition in mock_meta_conditions:
+                for idx, row in enumerate(payloads_fp):
+                    row_json = json.loads(row)
+                    vector = np.array(row_json["query"])
+                    if self.normalize:
+                        vector /= np.linalg.norm(vector)
+                    yield Query(
+                        vector=vector.tolist(),
+                        sparse_vector=None,
+                        meta_conditions=condition,
+                        expected_result=row_json["closest_ids"],
+                        expected_scores=row_json["closest_scores"],
+                    )
