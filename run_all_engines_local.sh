@@ -26,6 +26,7 @@ fi
 read -p "Restart server? (yes/no): " restart_server
 
 export FILTER_CONFIG="one_filter"
+export QDRANT_VERSION="v1.12.1"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results
