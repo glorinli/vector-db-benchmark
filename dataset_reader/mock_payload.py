@@ -23,5 +23,5 @@ def read_payloads(index: int) -> dict:
         "type": "kbarticle",
         "chunking_strategy": "default",
         "body_text": RANDOM_TEXT,
-        "item_idex": index
+        "item_id": index
     }
