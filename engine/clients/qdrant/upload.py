@@ -58,11 +58,12 @@ class QdrantUploader(BaseUploader):
 
     @classmethod
     def post_upload(cls, _distance):
+        print("Enable indexing")
         cls.client.update_collection(
             collection_name=QDRANT_COLLECTION_NAME,
             optimizer_config=OptimizersConfigDiff(
-                # indexing_threshold=10_000,
-                max_optimization_threads=1,
+                indexing_threshold=20000,
+                # max_optimization_threads=1,
             ),
         )
 
