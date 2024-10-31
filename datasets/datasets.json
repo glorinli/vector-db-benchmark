@@ -103,7 +103,8 @@
       "group_id": "keyword",
       "external_id": "keyword",
       "type": "keyword",
-      "chunking_strategy": "keyword"
+      "chunking_strategy": "keyword",
+      "body_text": "text"
     }
   },
   {
@@ -122,7 +123,8 @@
       "chunking_strategy": "keyword",
       "x_id": "keyword",
       "y_id": "keyword",
-      "z_id": "keyword"
+      "z_id": "keyword",
+      "body_text": "text"
     }
   },
   {
@@ -133,7 +135,8 @@
     "path": "dbpedia-openai-100K-1536-angular/dbpedia_openai_100K",
     "link": "https://storage.googleapis.com/ann-filtered-benchmark/datasets/dbpedia_openai_100K.tgz",
     "schema": {
-      "account_id": "keyword"
+      "account_id": "keyword",
+      "body_text": "text"
     }
   },
   {
