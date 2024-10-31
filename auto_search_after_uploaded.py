@@ -6,10 +6,10 @@ import os
 import json
 from dataset_reader import mock_payload
 
-app = typer.Typer()
-
 import run
 from concurrent.futures import ProcessPoolExecutor
+
+app = typer.Typer()
 
 
 def _get_data_count(engine_name: str, server_host: str):
@@ -32,6 +32,7 @@ def _get_data_count(engine_name: str, server_host: str):
 def _run_experiment(engine_name: str, server_host: str, dataset_name: str, conditions: list[dict]):
     print("Running experiment with conditions:", conditions)
     os.environ.putenv("OVERRIDE_FILTER_CONFIG", json.dumps(conditions))
+    os.environ.putenv("WAIT_UNTIL_FIRST_SEARCH_SUCCESS", "True")
     run.run(engines=[engine_name], datasets=[dataset_name], host=server_host, skip_search=False, skip_upload=True)
 
 
