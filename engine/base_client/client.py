@@ -8,11 +8,28 @@ from benchmark.dataset import Dataset
 from engine.base_client.configure import BaseConfigurator
 from engine.base_client.search import BaseSearcher
 from engine.base_client.upload import BaseUploader
+import time
 
 RESULTS_DIR = ROOT_DIR / "results"
 RESULTS_DIR.mkdir(exist_ok=True)
 
 DETAILED_RESULTS = bool(int(os.getenv("DETAILED_RESULTS", False)))
+
+
+def rate_limited_generator(generator, max_items_per_sec):
+    interval = 1.0 / max_items_per_sec
+    last_yield_time = time.time()
+
+    for item in generator:
+        current_time = time.time()
+        elapsed = current_time - last_yield_time
+
+        # If not enough time has passed, wait
+        if elapsed < interval:
+            time.sleep(interval - elapsed)
+
+        yield item
+        last_yield_time = time.time()  # Update last yield time after yielding
 
 
 class BaseClient:
@@ -106,8 +123,21 @@ class BaseClient:
             self.configurator.configure(dataset)
 
             print("Experiment stage: Upload")
+            data = reader.read_data()
+
+            max_items_per_sec = os.getenv("MAX_ITEMS_PER_SEC")
+            if max_items_per_sec:
+                max_items_per_sec = int(max_items_per_sec)
+            else:
+                max_items_per_sec = -1
+
+            if max_items_per_sec > 0:
+                data = rate_limited_generator(
+                    data, max_items_per_sec
+                )
+
             upload_stats = self.uploader.upload(
-                distance=dataset.config.distance, records=reader.read_data()
+                distance=dataset.config.distance, records=data
             )
 
             if not DETAILED_RESULTS:
