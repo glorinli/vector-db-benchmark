@@ -37,7 +37,7 @@
       }
     ]
   },
-  "2_filters_with_5x8_values": {
+  "2_filters_with_5x6_values": {
     "distinct_data_size": 100000,
     "distinct_fields": {
       "name": "account_id",
@@ -46,7 +46,7 @@
       "next_level": {
         "name": "group_id",
         "type": "keyword",
-        "values_count": 8
+        "values_count": 6
       }
     },
     "extra_fields": [
