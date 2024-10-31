@@ -85,8 +85,8 @@ class AnnCompoundReader(JSONReader):
 
         print(f"Condition count: {len(mock_meta_conditions)}")
 
-        with open(self.path / self.QUERIES_FILE) as payloads_fp:
-            for condition in mock_meta_conditions:
+        for condition in mock_meta_conditions:
+            with open(self.path / self.QUERIES_FILE) as payloads_fp:
                 for idx, row in enumerate(payloads_fp):
                     row_json = json.loads(row)
                     vector = np.array(row_json["query"])

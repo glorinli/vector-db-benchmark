@@ -74,10 +74,11 @@ class BaseSearcher:
 
         search_one = functools.partial(self.__class__._search_one, top=top)
 
-        first_query = next(iter(queries))
-        query_condition = first_query.meta_conditions
         wait_first_search_time = 0
+        query_condition = None
         if wait_until_first_search_success:
+            first_query = next(iter(queries))
+            query_condition = first_query.meta_conditions
             wait_start = time.perf_counter()
             print("Waiting for the first search to complete...")
             while True:
