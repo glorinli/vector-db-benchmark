@@ -75,6 +75,7 @@ class BaseSearcher:
         search_one = functools.partial(self.__class__._search_one, top=top)
 
         first_query = next(iter(queries))
+        query_condition = first_query.meta_conditions
         wait_first_search_time = 0
         if wait_until_first_search_success:
             wait_start = time.perf_counter()
@@ -134,7 +135,8 @@ class BaseSearcher:
             "p99_time": np.percentile(latencies, 99),
             "precisions": precisions,
             "latencies": latencies,
-            "wait_first_search_time": wait_first_search_time
+            "wait_first_search_time": wait_first_search_time,
+            "query_condition": query_condition,
         }
 
     def setup_search(self):
