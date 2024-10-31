@@ -91,7 +91,7 @@ class OpenSearchSearcher(BaseSearcher):
             },
         )
         return [
-            (uuid.UUID(hex=hit["_id"]).int, hit["_score"])
+            (_get_hit_id(hit), hit["_score"])
             for hit in res["hits"]["hits"]
         ]
 
