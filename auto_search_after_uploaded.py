@@ -8,6 +8,9 @@ from dataset_reader import mock_payload
 
 app = typer.Typer()
 
+import run
+from concurrent.futures import ProcessPoolExecutor
+
 
 def _get_data_count(engine_name: str, server_host: str):
     try:
@@ -24,6 +27,11 @@ def _get_data_count(engine_name: str, server_host: str):
     except Exception as e:
         print("Error while getting data count", e)
         return -1
+
+
+def _run_experiment(engine_name: str, server_host: str, dataset_name: str):
+    print("Running experiment")
+    run.run(engines=[engine_name], datasets=[dataset_name], host=server_host)
 
 
 @app.command()
@@ -43,29 +51,30 @@ def run(
     flattened_filters = mock_payload.flatten_filters(distinct_filter)
     print("Flattened filters size:", len(flattened_filters))
 
-    triggered_group = set()
-    while True:
-        time.sleep(5)
-        data_count = _get_data_count(engine_name, server_host)
-        if data_count == -1:
-            print("Error while getting data count. Retrying...")
-            continue
-        if data_count == 0:
-            print("Data count is 0. Retrying...")
-            continue
-        latest_uploaded_group = data_count // distinct_data_size
-        print(f"Data count: {data_count} Latest uploaded group: {latest_uploaded_group}")
-
-        for group in range(latest_uploaded_group):
-            if group in triggered_group:
+    with ProcessPoolExecutor() as executor:
+        triggered_group = set()
+        while True:
+            time.sleep(5)
+            data_count = _get_data_count(engine_name, server_host)
+            if data_count == -1:
+                print("Error while getting data count. Retrying...")
                 continue
-            filter_for_group = flattened_filters[group]
-            print("Triggering for group:", group, filter_for_group)
-            triggered_group.add(group)
+            if data_count == 0:
+                print("Data count is 0. Retrying...")
+                continue
+            latest_uploaded_group = data_count // distinct_data_size
+            print(f"Data count: {data_count} Latest uploaded group: {latest_uploaded_group}")
 
-        if latest_uploaded_group >= len(flattened_filters):
-            print("All groups are triggered")
-            break
+            for group in range(latest_uploaded_group):
+                if group in triggered_group:
+                    continue
+                filter_for_group = flattened_filters[group]
+                print("Triggering for group:", group, filter_for_group)
+                triggered_group.add(group)
+
+            if latest_uploaded_group >= len(flattened_filters):
+                print("All groups are triggered")
+                break
 
 
 if __name__ == '__main__':
