@@ -26,34 +26,10 @@ class AnnCompoundReader(JSONReader):
         filter_config = os.getenv('FILTER_CONFIG')
         self.filter_config = json.load(open("./filter_config.json")).get(filter_config, {})
 
-    @staticmethod
-    def _flatten_filters(data, prefix=""):
-        result = []
-
-        for i in range(data["values_count"]):
-            base_value = f"{prefix}{data['name']}_{i}"
-            current_level = {
-                "name": data["name"],
-                "type": data["type"],
-                "value": base_value
-            }
-
-            if "next_level" in data:
-                # Get next level combinations and append current level to each combination
-                next_level_combinations = AnnCompoundReader._flatten_filters(data["next_level"],
-                                                                             prefix=base_value + "_")
-                for combination in next_level_combinations:
-                    result.append([current_level] + combination)
-            else:
-                # If no further levels, add as a single-level group
-                result.append([current_level])
-
-        return result
-
     def _get_filters(self) -> list[list]:
         distinct_filter = self.filter_config.get("distinct_fields")
 
-        flattened_filters = AnnCompoundReader._flatten_filters(distinct_filter)
+        flattened_filters = mock_payload.flatten_filters(distinct_filter)
 
         return flattened_filters
 
