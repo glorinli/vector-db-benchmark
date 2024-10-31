@@ -25,7 +25,7 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="one_filter"
+export FILTER_CONFIG="2_filters_with_10x5_values"
 export QDRANT_VERSION="v1.12.1"
 
 # Clear
