@@ -8,7 +8,7 @@ def generate_random_string(length):
     return ''.join(random.choices(string.ascii_uppercase + string.digits + string.whitespace, k=length))
 
 
-RANDOM_TEXT = generate_random_string(1000)
+RANDOM_TEXT = generate_random_string(100)
 
 MOCK_X_IDS = [f"{i}" for i in range(100)]
 MOCK_Y_IDS = [f"{i}" for i in range(100)]

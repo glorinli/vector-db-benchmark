@@ -52,13 +52,16 @@ class OpenSearchUploader(BaseUploader):
             operations.append({"index": {"_id": vector_id}})
             operations.append({"vector": record.vector, **(record.metadata or {})})
 
-        cls.client.bulk(
+        success, failed, = cls.client.bulk(
             index=OPENSEARCH_INDEX,
             body=operations,
             params={
                 "timeout": 300,
             },
         )
+
+        if failed > 0:
+            print(f"Failed to upload {failed} records")
 
     @classmethod
     def post_upload(cls, _distance):
