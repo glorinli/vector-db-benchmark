@@ -1,4 +1,5 @@
 import functools
+import os
 import time
 from multiprocessing import get_context
 from typing import Iterable, List, Optional, Tuple
@@ -61,7 +62,9 @@ class BaseSearcher:
         parallel = self.search_params.get("parallel", 1)
         top = self.search_params.get("top", None)
 
-        print(f"search with parallel={parallel}, top={top}")
+        wait_until_first_search_success = os.getenv("WAIT_UNTIL_FIRST_SEARCH_SUCCESS", False)
+
+        print(f"search with parallel={parallel}, top={top}, wait_until_first_search_success={wait_until_first_search_success}")
 
         # setup_search may require initialized client
         self.init_client(
@@ -70,6 +73,25 @@ class BaseSearcher:
         self.setup_search()
 
         search_one = functools.partial(self.__class__._search_one, top=top)
+
+        first_query = next(iter(queries))
+        wait_first_search_time = 0
+        if wait_until_first_search_success:
+            wait_start = time.perf_counter()
+            print("Waiting for the first search to complete...")
+            while True:
+                precision, latency = search_one(first_query)
+                if precision > 0.8 and latency < 3:
+                    print("First search completed successfully")
+                    wait_first_search_time = time.perf_counter() - wait_start
+                    break
+
+                if time.perf_counter() - wait_start > 600:
+                    print("First search failed after 10 minutes. Exiting...")
+                    return {
+                        "total_time": 600,
+                        "error": "First search failed after 10 minutes",
+                    }
 
         if parallel == 1:
             start = time.perf_counter()
@@ -112,6 +134,7 @@ class BaseSearcher:
             "p99_time": np.percentile(latencies, 99),
             "precisions": precisions,
             "latencies": latencies,
+            "wait_first_search_time": wait_first_search_time
         }
 
     def setup_search(self):
