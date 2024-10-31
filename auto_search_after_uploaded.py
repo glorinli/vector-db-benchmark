@@ -29,9 +29,10 @@ def _get_data_count(engine_name: str, server_host: str):
         return -1
 
 
-def _run_experiment(engine_name: str, server_host: str, dataset_name: str):
-    print("Running experiment")
-    run.run(engines=[engine_name], datasets=[dataset_name], host=server_host)
+def _run_experiment(engine_name: str, server_host: str, dataset_name: str, conditions: list[dict]):
+    print("Running experiment with conditions:", conditions)
+    os.environ.putenv("OVERRIDE_FILTER_CONFIG", json.dumps(conditions))
+    run.run(engines=[engine_name], datasets=[dataset_name], host=server_host, skip_search=False, skip_upload=True)
 
 
 @app.command()
@@ -70,6 +71,7 @@ def run(
                     continue
                 filter_for_group = flattened_filters[group]
                 print("Triggering for group:", group, filter_for_group)
+                executor.submit(_run_experiment, engine_name, server_host, dataset_name, filter_for_group)
                 triggered_group.add(group)
 
             if latest_uploaded_group >= len(flattened_filters):

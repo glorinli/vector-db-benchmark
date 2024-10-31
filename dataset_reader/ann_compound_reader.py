@@ -63,7 +63,15 @@ class AnnCompoundReader(JSONReader):
 
     def read_queries(self) -> Iterator[Query]:
         mock_meta_conditions = []
-        if self.filter_config:
+        override_filter_config = os.getenv('OVERRIDE_FILTER_CONFIG')
+        if override_filter_config:
+            filter_group = json.loads(override_filter_config)
+            mock_meta_conditions = [
+                {
+                    "and": [{item.get("name"): {"match": {"value": item.get("value")}} for item in filter_group}]
+                }
+            ]
+        elif self.filter_config:
             filters = self._get_filters()
             # Pick filters every 10th query
             for i in range(0, len(filters), 10):
