@@ -24,7 +24,8 @@ class AnnCompoundReader(JSONReader):
         super().__init__(path, normalize)
 
         filter_config = os.getenv('FILTER_CONFIG')
-        self.filter_config = json.load(open("./filter_config.json")).get(filter_config, {})
+        with open("./filter_config.json") as json_file:
+            self.filter_config = json.load(json_file).get(filter_config, {})
 
     def _get_filters(self) -> list[list]:
         distinct_filter = self.filter_config.get("distinct_fields")
