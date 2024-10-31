@@ -6,6 +6,8 @@ services:
     ports:
       - "16333:6333"
       - "16334:6334"
+    volumes:
+      - ./data:/qdrant/storage
     logging:
       driver: "json-file"
       options:

@@ -8,6 +8,8 @@ services:
       plugins.security.disabled: true
       OPENSEARCH_JAVA_OPTS: "-Xms4g -Xmx4g"
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: "Copilot!123"
+    volumes:
+      - ./data:/usr/share/opensearch/data
     ports:
       - "29200:9200"
       - "29300:9300"
