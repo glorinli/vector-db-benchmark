@@ -20,6 +20,11 @@ class ClosableOpenSearch(OpenSearch):
         self.close()
 
 
+def _get_hit_id(hit):
+    id_from_payload = hit.get("_source", {}).get("item_id")
+    return id_from_payload if id_from_payload else uuid.UUID(hex=hit["_id"]).int
+
+
 class OpenSearchSearcher(BaseSearcher):
     search_params = {}
     client: OpenSearch = None
