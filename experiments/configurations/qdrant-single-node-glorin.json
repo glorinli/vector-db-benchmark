@@ -136,7 +136,7 @@
     "search_params": [
       { "parallel": 100, "config": { "hnsw_ef": 256 } }
     ],
-    "upload_params": { "parallel": 4, "batch_size": 32 }
+    "upload_params": { "parallel": 2, "batch_size": 32 }
   },
   {
     "name": "qdrant-m-32-ef-256-search-ef-256-p-200",
