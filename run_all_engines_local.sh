@@ -36,6 +36,8 @@ if [ "$clear_results" == "yes" ]; then
     rm ./results/*.json || true
 fi
 
+STREAMING_TEST="false"
+
 function run_exp() {
     SERVER_PATH=$1
     ENGINE_NAME=$2
@@ -53,7 +55,16 @@ function run_exp() {
     source $(poetry env info --path)/bin/activate
     which python
     echo 'Run experiments...'
-    python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args
+
+    if [ "$STREAMING_TEST" == "true" ]; then
+        # Run two python scripts in parallel, and wait for both to finish
+        python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args &
+        python3 auto_search_after_uploaded.py --engine-name "$ENGINE_NAME" --dataset-name "${DATASETS}" ---server-host "$SERVER_HOST" &
+        wait
+    else
+        python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args
+    fi
+
     echo 'Shutdown server...'
     # bash -c "cd ./engine/servers/$SERVER_PATH ; docker compose down"
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
