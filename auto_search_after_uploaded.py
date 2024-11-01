@@ -6,7 +6,7 @@ import os
 import json
 from dataset_reader import mock_payload
 
-import run
+from run import run as main_run
 from concurrent.futures import ProcessPoolExecutor
 
 app = typer.Typer()
@@ -31,9 +31,26 @@ def _get_data_count(engine_name: str, server_host: str):
 
 def _run_experiment(engine_name: str, server_host: str, dataset_name: str, conditions: list[dict]):
     print("Running experiment with conditions:", conditions)
-    os.environ.putenv("OVERRIDE_FILTER_CONFIG", json.dumps(conditions))
-    os.environ.putenv("WAIT_UNTIL_FIRST_SEARCH_SUCCESS", "True")
-    run.run(engines=[engine_name], datasets=[dataset_name], host=server_host, skip_search=False, skip_upload=True)
+    try:
+        os.environ["OVERRIDE_FILTER_CONFIG"] = json.dumps(conditions)
+        os.environ["WAIT_UNTIL_FIRST_SEARCH_SUCCESS"] = "True"
+    except Exception as e:
+        print("Error while setting environment variables", e)
+        return
+
+    try:
+        main_run(
+            engines=[engine_name],
+            datasets=[dataset_name],
+            host=server_host,
+            skip_upload=True,
+            skip_search=False,
+            skip_if_exists=False,
+            exit_on_error=True,
+            timeout=86400.0
+        )
+    except Exception as e:
+        print("Error while running experiment", e)
 
 
 @app.command()

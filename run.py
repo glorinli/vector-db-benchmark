@@ -24,6 +24,7 @@ def run(
     exit_on_error: bool = True,
     timeout: float = 86400.0,
 ):
+    print("run.py.Running")
     """
     Example:
         python3 run.py --engines "*-m-16-*" --engines "qdrant-*" --datasets "glove-*"
