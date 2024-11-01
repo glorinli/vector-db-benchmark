@@ -76,15 +76,15 @@ class QdrantConfigurator(BaseConfigurator):
         )
 
         # Disable indexing, will enable it after uploading
-        if self.connection_params.get('disable_indexing_when_uploading', True):
-            print("Disabling indexing")
-            self.client.update_collection(
-                collection_name=QDRANT_COLLECTION_NAME,
-                optimizer_config=rest.OptimizersConfigDiff(
-                    indexing_threshold=0,
-                    # max_optimization_threads=0,
-                ),
-            )
+        # if self.connection_params.get('disable_indexing_when_uploading', True):
+        #     print("Disabling indexing")
+        #     self.client.update_collection(
+        #         collection_name=QDRANT_COLLECTION_NAME,
+        #         optimizer_config=rest.OptimizersConfigDiff(
+        #             indexing_threshold=0,
+        #             # max_optimization_threads=0,
+        #         ),
+        #     )
         for field_name, field_type in dataset.config.schema.items():
             if field_type in ["keyword", "uuid"]:
                 is_tenant = payload_index_params.get(field_name, {}).get(

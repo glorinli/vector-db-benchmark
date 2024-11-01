@@ -13,7 +13,7 @@ from engine.clients.qdrant.parser import QdrantConditionParser
 
 
 def _get_hit_id(hit: rest.ScoredPoint):
-    payload_id = hit.payload.get("id", None)
+    payload_id = hit.payload.get("item_id", None)
     return payload_id if payload_id is not None else hit.id
 
 

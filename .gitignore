@@ -9,3 +9,5 @@ tools/custom/data.json
 monitoring/*.jsonl
 monitoring/*.lock
 monitoring/results/*.jsonl
+
+engine/servers/qdrant-single-node/data/
