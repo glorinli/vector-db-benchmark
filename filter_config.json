@@ -55,5 +55,24 @@
         "type": "keyword"
       }
     ]
+  },
+  "2_filters_with_1x3_values": {
+    "distinct_data_size": 100000,
+    "distinct_fields": {
+      "name": "account_id",
+      "type": "keyword",
+      "values_count": 1,
+      "next_level": {
+        "name": "group_id",
+        "type": "keyword",
+        "values_count": 6
+      }
+    },
+    "extra_fields": [
+      {
+        "name": "external_id",
+        "type": "keyword"
+      }
+    ]
   }
 }

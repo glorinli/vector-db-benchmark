@@ -25,9 +25,9 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="2_filters_with_5x6_values"
+export FILTER_CONFIG="2_filters_with_1x3_values"
 export QDRANT_VERSION="v1.12.1"
-export MAX_ITEMS_PER_SEC="500"
+# export MAX_ITEMS_PER_SEC="500"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results
@@ -36,7 +36,7 @@ if [ "$clear_results" == "yes" ]; then
     rm ./results/*.json || true
 fi
 
-STREAMING_TEST="false"
+STREAMING_TEST="true"
 
 function run_exp() {
     SERVER_PATH=$1
