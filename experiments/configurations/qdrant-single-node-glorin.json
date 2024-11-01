@@ -125,6 +125,20 @@
     "upload_params": { "parallel": 16 }
   },
   {
+    "name": "qdrant-m-32-ef-256-search-ef-256-p-200-mmap",
+    "engine": "qdrant",
+    "connection_params": { "timeout": 30 },
+    "collection_params": {
+      "optimizers_config": { "memmap_threshold": 10000 },
+      "hnsw_config": { "m": 32, "ef_construct": 256 },
+      "vectors_config": { "on_disk": true }
+    },
+    "search_params": [
+      { "parallel": 200, "config": { "hnsw_ef": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
     "name": "qdrant-m-32-ef-256-search-ef-256-p-100-mmap-slow",
     "engine": "qdrant",
     "connection_params": { "timeout": 30 },

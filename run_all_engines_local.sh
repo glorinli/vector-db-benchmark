@@ -75,7 +75,7 @@ function run_exp() {
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
-run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100-mmap'
+run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200-mmap'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100-mmap-slow'
 
 
