@@ -25,9 +25,9 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="2_filters_with_1x3_values"
+export FILTER_CONFIG="2_filters_with_2x3_values"
 export QDRANT_VERSION="v1.12.1"
-# export MAX_ITEMS_PER_SEC="500"
+export MAX_ITEMS_PER_SEC="500"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results
@@ -59,7 +59,7 @@ function run_exp() {
     if [ "$STREAMING_TEST" == "true" ]; then
         # Run two python scripts in parallel, and wait for both to finish
         python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args &
-        python3 auto_search_after_uploaded.py --engine-name "$ENGINE_NAME" --dataset-name "${DATASETS}" ---server-host "$SERVER_HOST" &
+        python3 auto_search_after_uploaded.py --engine-name "$ENGINE_NAME" --dataset-name "${DATASETS}" --server-host "$SERVER_HOST" &
         wait
     else
         python3 run.py --engines "$ENGINE_NAME" --datasets "${DATASETS}" --host "$SERVER_HOST" $extra_args
@@ -70,6 +70,10 @@ function run_exp() {
     bash -c "cd ./monitoring && mkdir -p results && mv docker.stats.jsonl ./results/${MONITOR_PATH}-docker.stats.jsonl"
 
     python3 find_max_cpu_mem.py ./monitoring/results/${MONITOR_PATH}-docker.stats.jsonl $SERVER_PATH
+
+    if [ "$STREAMING_TEST" == "true" ]; then
+        python3 result_analyze.py
+    fi
 }
 
 
@@ -86,7 +90,7 @@ function run_exp() {
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
-run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200-mmap'
+# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200-mmap'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100-mmap-slow'
 
 
@@ -101,7 +105,7 @@ run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200-mmap'
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
-# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-200'
