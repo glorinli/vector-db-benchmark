@@ -3,7 +3,7 @@
 set -e
 
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1+2+1"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-2+2+1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
@@ -25,7 +25,7 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="filter-1-1x24"
+export FILTER_CONFIG="filter-2-3x4"
 export QDRANT_VERSION="v1.12.1"
 # export MAX_ITEMS_PER_SEC="500"
 
