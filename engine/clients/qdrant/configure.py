@@ -101,6 +101,9 @@ class QdrantConfigurator(BaseConfigurator):
                         on_disk=on_disk,
                     ),
                 )
+            elif field_type in ["text"]:
+                print("Skipping text field type for qdrant")
+                continue
             else:
                 self.client.create_payload_index(
                     collection_name=QDRANT_COLLECTION_NAME,
