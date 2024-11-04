@@ -85,6 +85,7 @@ class OpenSearchConfigurator(BaseConfigurator):
                             },
                         },
                         **self._prepare_fields_config(dataset),
+                        **self._ignore_field_config()
                     }
                 },
             },
@@ -103,4 +104,14 @@ class OpenSearchConfigurator(BaseConfigurator):
                 "index": True,
             }
             for field_name, field_type in dataset.config.schema.items()
+        }
+
+    def _ignore_field_config(self):
+        ignore_fields = ['x_id', 'y_id', 'z_id', 'item_id']
+        return {
+            field_name: {
+                "type": "text",
+                "index": False
+            }
+            for field_name in ignore_fields
         }
