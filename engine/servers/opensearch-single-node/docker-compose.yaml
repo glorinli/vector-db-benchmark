@@ -6,6 +6,7 @@ services:
     environment:
       discovery.type: "single-node"
       plugins.security.disabled: true
+      bootstrap.memory_lock: true # along with the memlock settings below, disables swapping
       OPENSEARCH_JAVA_OPTS: "-Xms8g -Xmx8g"
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: "Copilot!123"
     ulimits:
