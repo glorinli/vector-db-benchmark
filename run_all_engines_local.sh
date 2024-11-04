@@ -3,7 +3,7 @@
 set -e
 
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1+2+1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
@@ -25,9 +25,9 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="2_filters_with_2x3_values"
+export FILTER_CONFIG="filter-1-1x24"
 export QDRANT_VERSION="v1.12.1"
-export MAX_ITEMS_PER_SEC="500"
+# export MAX_ITEMS_PER_SEC="500"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results
@@ -36,7 +36,7 @@ if [ "$clear_results" == "yes" ]; then
     rm ./results/*.json || true
 fi
 
-STREAMING_TEST="true"
+# STREAMING_TEST="true"
 
 function run_exp() {
     SERVER_PATH=$1
@@ -90,8 +90,8 @@ function run_exp() {
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
-# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-200-mmap'
-# run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100-mmap-slow'
+run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mmap'
+
 
 
 # run_exp "elasticsearch-single-node" 'elastic-m-*'
@@ -105,7 +105,7 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
-run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-200'
