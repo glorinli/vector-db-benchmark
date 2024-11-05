@@ -75,7 +75,7 @@ class AnnCompoundReader(JSONReader):
         elif self.filter_config:
             filters = self._get_filters()
             # Pick filters every 10th query
-            for i in range(0, len(filters), 5):
+            for i in range(0, 12, 5):
                 filter_group = filters[i]
                 mock_meta_conditions.append({
                     "and": [{item.get("name"): {"match": {"value": item.get("value")}} for item in filter_group}]

@@ -97,5 +97,28 @@
         }
       }
     }
+  },
+  "filter-4-1x2x2x3": {
+    "distinct_data_size": 100000,
+    "distinct_fields": {
+      "name": "account_id",
+      "type": "keyword",
+      "values_count": 1,
+      "next_level": {
+        "name": "group_id",
+        "type": "keyword",
+        "values_count": 2,
+        "next_level": {
+          "name": "external_id",
+          "type": "keyword",
+          "values_count": 2,
+          "next_level": {
+            "name": "sub_external_id",
+            "type": "keyword",
+            "values_count": 3
+          }
+        }
+      }
+    }
   }
 }

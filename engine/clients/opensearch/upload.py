@@ -61,6 +61,8 @@ class OpenSearchUploader(BaseUploader):
         )
 
         if response["errors"]:
+            first_record = batch[0]
+            print(f"First record vector length: {len(first_record.vector)}")
             print(f"Failed to upload some records")
 
     @classmethod

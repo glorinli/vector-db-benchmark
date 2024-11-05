@@ -13,6 +13,8 @@ services:
       options:
         max-file: 1
         max-size: 10m
+    # environment:
+      # - QDRANT__STORAGE__PERFORMANCE__MAX_SEARCH_THREADS=4
     deploy:
       resources:
         limits:

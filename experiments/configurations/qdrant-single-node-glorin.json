@@ -135,30 +135,18 @@
       "replication_factor": 2
     },
     "search_params": [
-      { "parallel": 200, "config": { "hnsw_ef": 256 } }
+      { "parallel": 100, "config": { "hnsw_ef": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },
   {
-    "name": "qdrant-m-32-ef-256-search-ef-256-p-200",
+    "name": "qdrant-payload-m-32-ef-256-tenant-mmap",
     "engine": "qdrant",
     "connection_params": { "timeout": 30 },
     "collection_params": {
-      "optimizers_config": { "memmap_threshold": 10000000 },
-      "hnsw_config": { "m": 32, "ef_construct": 256 }
-    },
-    "search_params": [
-      { "parallel": 200, "config": { "hnsw_ef": 256 } }
-    ],
-    "upload_params": { "parallel": 16 }
-  },
-  {
-    "name": "qdrant-payload-m-32-ef-256-tenant",
-    "engine": "qdrant",
-    "connection_params": { "timeout": 30 },
-    "collection_params": {
-      "optimizers_config": { "memmap_threshold": 10000000 },
+      "optimizers_config": { "memmap_threshold": 10000 },
       "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
+      "vectors_config": { "on_disk": true },
       "payload_index_params": {
         "account_id": { "is_tenant": true }
       }
@@ -169,12 +157,13 @@
     "upload_params": { "parallel": 16 }
   },
   {
-    "name": "qdrant-payload-m-32-ef-256-scalar-quantization",
+    "name": "qdrant-payload-m-32-ef-256-scalar-quantization-mmap",
     "engine": "qdrant",
     "connection_params": { "timeout": 30 },
     "collection_params": {
-      "optimizers_config": { "memmap_threshold": 10000000 },
+      "optimizers_config": { "memmap_threshold": 10000 },
       "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
+      "vectors_config": { "on_disk": true },
       "quantization_config": {
         "scalar": {
           "type": "int8",
