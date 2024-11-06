@@ -91,6 +91,8 @@ function run_exp() {
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
 run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mmap'
+# run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-mmap'
+# run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-tenant-mmap'
 
 
 
@@ -106,6 +108,7 @@ run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mma
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200-scalar'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-200'

@@ -36,6 +36,18 @@
     "upload_params": { "parallel": 16 }
   },
   {
+    "name": "opensearch-faiss-m-32-ef-256-search-ef-256-p-200-scalar",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256, "encoder": { "name": "sq" } },  "engine": "faiss", "space_type": "l2" } },
+    "search_params": [
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
     "name": "opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100",
     "engine": "opensearch",
     "connection_params": {

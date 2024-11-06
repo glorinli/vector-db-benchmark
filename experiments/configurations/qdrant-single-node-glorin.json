@@ -147,12 +147,13 @@
       "optimizers_config": { "memmap_threshold": 10000 },
       "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
       "vectors_config": { "on_disk": true },
+      "replication_factor": 2,
       "payload_index_params": {
         "account_id": { "is_tenant": true }
       }
     },
     "search_params": [
-      { "parallel": 100, "config": { "hnsw_ef": 256 } }
+      { "parallel": 200, "config": { "hnsw_ef": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },
@@ -164,6 +165,7 @@
       "optimizers_config": { "memmap_threshold": 10000 },
       "hnsw_config": { "m": 0, "payload_m": 32, "ef_construct": 256 },
       "vectors_config": { "on_disk": true },
+      "replication_factor": 2,
       "quantization_config": {
         "scalar": {
           "type": "int8",
@@ -172,7 +174,7 @@
       }
     },
     "search_params": [
-      { "parallel": 100, "config": { "hnsw_ef": 256 } }
+      { "parallel": 200, "config": { "hnsw_ef": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },

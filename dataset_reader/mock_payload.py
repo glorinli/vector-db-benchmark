@@ -8,7 +8,7 @@ def generate_random_string(length):
     return ''.join(random.choices(string.ascii_uppercase + string.digits + string.whitespace, k=length))
 
 
-RANDOM_TEXT = generate_random_string(100)
+RANDOM_TEXT = "By default, the k-NN plugin supports the indexing and querying of vectors of type float, where each dimension of the vector occupies 4 bytes of memory. For use cases that require ingestion on a large scale, keeping float vectors can be expensive because OpenSearch needs to construct, load, save, and search graphs (for native nmslib and faiss engines). To reduce the memory footprint, you can use vector quantization."
 
 MOCK_X_IDS = [f"{i}" for i in range(100)]
 MOCK_Y_IDS = [f"{i}" for i in range(100)]
