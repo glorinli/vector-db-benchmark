@@ -3,7 +3,7 @@
 set -e
 
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular"}
-DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-2+2+1"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1+0+1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
@@ -25,7 +25,7 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="filter-2-3x4"
+export FILTER_CONFIG="filter-1-1x10"
 export QDRANT_VERSION="v1.12.1"
 # export MAX_ITEMS_PER_SEC="500"
 
@@ -90,7 +90,7 @@ function run_exp() {
 
 # run_exp "qdrant-single-node" 'qdrant-m-16-ef-128-search-ef-128-p-500'
 # run_exp "qdrant-single-node" 'qdrant-m-32-ef-256-search-ef-256-p-100'
-run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mmap'
+# run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mmap'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-scalar-quantization-mmap'
 # run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-tenant-mmap'
 
@@ -107,7 +107,7 @@ run_exp "qdrant-single-node" 'qdrant-payload-m-32-ef-256-search-ef-256-p-200-mma
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
-# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200-scalar'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'

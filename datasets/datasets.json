@@ -153,7 +153,7 @@
     }
   },
   {
-    "name": "dbpedia-openai-100K-1536-angular-with-schema-9",
+    "name": "dbpedia-openai-100K-1536-angular-with-schema-1+0+1",
     "vector_size": 1536,
     "distance": "cosine",
     "type": "tar",
@@ -161,14 +161,6 @@
     "link": "https://storage.googleapis.com/ann-filtered-benchmark/datasets/dbpedia_openai_100K.tgz",
     "schema": {
       "account_id": "keyword",
-      "extension_id": "keyword",
-      "group_id": "keyword",
-      "external_id": "keyword",
-      "type": "keyword",
-      "chunking_strategy": "keyword",
-      "x_id": "keyword",
-      "y_id": "keyword",
-      "z_id": "keyword",
       "body_text": "text"
     }
   },

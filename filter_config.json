@@ -51,6 +51,14 @@
       }
     }
   },
+  "filter-1-1x10": {
+    "distinct_data_size": 100000,
+    "distinct_fields": {
+      "name": "account_id",
+      "type": "keyword",
+      "values_count": 10
+    }
+  },
   "filter-1-1x24": {
     "distinct_data_size": 100000,
     "distinct_fields": {
