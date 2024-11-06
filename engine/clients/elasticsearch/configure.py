@@ -52,16 +52,16 @@ class ElasticConfigurator(BaseConfigurator):
             mappings={
                 "_source": {"excludes": ["vector"]},
                 "properties": {
-                    "vector": {
-                        "type": "dense_vector",
-                        "dims": dataset.config.vector_size,
-                        "index": True,
-                        "similarity": self.DISTANCE_MAPPING[dataset.config.distance],
-                        "index_options": {
-                            "type": "hnsw",
-                            **collection_params["index_options"],
-                        },
-                    },
+                    # "vector": {
+                    #     "type": "dense_vector",
+                    #     "dims": dataset.config.vector_size,
+                    #     "index": True,
+                    #     "similarity": self.DISTANCE_MAPPING[dataset.config.distance],
+                    #     "index_options": {
+                    #         "type": "hnsw",
+                    #         **collection_params["index_options"],
+                    #     },
+                    # },
                     **self._prepare_fields_config(dataset),
                 },
             },

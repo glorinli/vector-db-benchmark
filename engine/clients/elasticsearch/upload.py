@@ -33,7 +33,8 @@ class ElasticUploader(BaseUploader):
         for record in batch:
             vector_id = uuid.UUID(int=record.id).hex
             operations.append({"index": {"_id": vector_id}})
-            operations.append({"vector": record.vector, **(record.metadata or {})})
+            # operations.append({"vector": record.vector, **(record.metadata or {})})
+            operations.append({**(record.metadata or {})})
 
         cls.client.bulk(
             index=ELASTIC_INDEX,
