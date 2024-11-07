@@ -51,6 +51,7 @@ class OpenSearchSearcher(BaseSearcher):
         )
         cls.search_params = search_params
         cls.use_post_filter = search_params.get("use_post_filter", False)
+        cls.use_boolean_post_filter = search_params.get("use_boolean_post_filter", False)
 
     @classmethod
     def search_one(cls, query: Query, top: int) -> List[Tuple[int, float]]:
@@ -65,7 +66,7 @@ class OpenSearchSearcher(BaseSearcher):
 
         meta_conditions = cls.parser.parse(query.meta_conditions)
 
-        if cls.use_post_filter:
+        if cls.use_boolean_post_filter:
             search_body = {
                 "size": top,
                 "query": {
@@ -74,6 +75,12 @@ class OpenSearchSearcher(BaseSearcher):
                         "filter": meta_conditions,
                     }
                 },
+            }
+        elif cls.use_post_filter:
+            search_body = {
+                "query": opensearch_query,
+                "size": top,
+                "post_filter": meta_conditions
             }
         else:
             if meta_conditions:
