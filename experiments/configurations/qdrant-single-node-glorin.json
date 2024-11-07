@@ -135,7 +135,7 @@
       "replication_factor": 2
     },
     "search_params": [
-      { "parallel": 100, "config": { "hnsw_ef": 256 } }
+      { "parallel": 200, "config": { "hnsw_ef": 256 } }
     ],
     "upload_params": { "parallel": 16 }
   },

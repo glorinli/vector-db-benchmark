@@ -2,7 +2,7 @@ import os
 
 from elasticsearch import Elasticsearch
 
-ELASTIC_PORT = int(os.getenv("ELASTIC_PORT", 9200))
+ELASTIC_PORT = int(os.getenv("ELASTIC_PORT", 39200))
 ELASTIC_INDEX = os.getenv("ELASTIC_INDEX", "bench")
 ELASTIC_USER = os.getenv("ELASTIC_USER", "elastic")
 ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD", "passwd")

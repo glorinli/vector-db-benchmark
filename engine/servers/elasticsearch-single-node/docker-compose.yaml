@@ -10,8 +10,8 @@ services:
       discovery.type: "single-node"
       xpack.security.enabled: "false"
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "39200:9200"
+      - "39300:9300"
     logging:
       driver: "json-file"
       options:
@@ -21,3 +21,4 @@ services:
       resources:
         limits:
           memory: 16Gb
+          cpus: '8'
