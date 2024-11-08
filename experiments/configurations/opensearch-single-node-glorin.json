@@ -67,7 +67,31 @@
     },
     "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 } } },
     "search_params": [
-      { "parallel": 200, "config": { "knn.algo_param.ef_search": 256 } }
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 } }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "opensearch-m-32-ef-256-search-ef-256-p-200-post-filter",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 } } },
+    "search_params": [
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 }, "use_post_filter": true }
+    ],
+    "upload_params": { "parallel": 16 }
+  },
+  {
+    "name": "opensearch-m-32-ef-256-search-ef-256-p-200-boolean-post-filter",
+    "engine": "opensearch",
+    "connection_params": {
+      "request_timeout": 10000
+    },
+    "collection_params": { "method": { "parameters": { "m": 32, "ef_construction": 256 } } },
+    "search_params": [
+      { "parallel": 100, "config": { "knn.algo_param.ef_search": 256 }, "use_boolean_post_filter": true }
     ],
     "upload_params": { "parallel": 16 }
   },

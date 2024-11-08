@@ -67,6 +67,7 @@ class OpenSearchSearcher(BaseSearcher):
         meta_conditions = cls.parser.parse(query.meta_conditions)
 
         if cls.use_boolean_post_filter:
+            opensearch_query["knn"]["vector"]["k"] = round(top * 3)
             search_body = {
                 "size": top,
                 "query": {
@@ -77,6 +78,7 @@ class OpenSearchSearcher(BaseSearcher):
                 },
             }
         elif cls.use_post_filter:
+            opensearch_query["knn"]["vector"]["k"] = round(top * 3)
             search_body = {
                 "query": opensearch_query,
                 "size": top,

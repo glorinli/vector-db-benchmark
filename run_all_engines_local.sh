@@ -2,8 +2,8 @@
 
 set -e
 
-DATASETS=${DATASETS:-"dbpedia-openai-1M-1536-angular-with-schema"}
-# DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-2+2+1"}
+# DATASETS=${DATASETS:-"dbpedia-openai-1M-1536-angular-with-schema"}
+DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-2+2+1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-1"}
 # DATASETS=${DATASETS:-"dbpedia-openai-100K-1536-angular-with-schema-9"}
 
@@ -25,11 +25,11 @@ fi
 
 read -p "Restart server? (yes/no): " restart_server
 
-export FILTER_CONFIG="filter-1-1x10"
+export FILTER_CONFIG="filter-2-3x4"
 export QDRANT_VERSION="v1.12.1"
 # export MAX_ITEMS_PER_SEC="500"
 
-export OVERRIDE_FILTER_CONFIG="[{\"name\":\"account_id\", \"value\": \"account_id_0\"}]"
+# export OVERRIDE_FILTER_CONFIG="[{\"name\":\"account_id\", \"value\": \"account_id_0\"}]"
 
 # Clear
 read -p "Clear results? (yes/no): " clear_results
@@ -107,14 +107,23 @@ function run_exp() {
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-scalar-quantization'
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-batch-128'
 # run_exp "opensearch-single-node" 'opensearch-m-16-ef-128-search-ef-128-p-500'
+
 # run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200-post-filter'
+# run_exp "opensearch-single-node" 'opensearch-m-32-ef-256-search-ef-256-p-200-post-filter'
+
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-100'
-run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200-boolean-post-filter'
+# run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200-post-filter'
+
 # run_exp "opensearch-single-node" 'opensearch-faiss-m-32-ef-256-search-ef-256-p-200-scalar'
 # run_exp "opensearch-single-node" 'opensearch-faiss-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-faiss-ivf-l2-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-cosine-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-l2-m-32-ef-256-search-ef-256-p-100'
+run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-l2-m-32-ef-256-search-ef-256-p-100-boolean'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-l2-m-32-ef-256-search-ef-256-p-200'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-100'
 # run_exp "opensearch-single-node" 'opensearch-nmsli-hnsw-innerproduct-m-32-ef-256-search-ef-256-p-200'

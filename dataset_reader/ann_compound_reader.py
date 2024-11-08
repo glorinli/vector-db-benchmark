@@ -83,11 +83,11 @@ class AnnCompoundReader(JSONReader):
         else:
             mock_meta_conditions = [None]
 
-        # for condition in mock_meta_conditions:
-        #     if condition:
-        #         and_cond = condition["and"]
-        #         and_cond.append({"type": {"match": {"value": "kbarticle"}}})
-        #         and_cond.append({"chunking_strategy": {"match": {"value": "default"}}})
+        for condition in mock_meta_conditions:
+            if condition:
+                and_cond = condition["and"]
+                and_cond.append({"type": {"match": {"value": "kbarticle"}}})
+                and_cond.append({"chunking_strategy": {"match": {"value": "default"}}})
 
         print(f"Condition count: {len(mock_meta_conditions)}")
 
